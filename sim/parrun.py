@@ -53,26 +53,27 @@ def prun(tstop):
         #pc.psolve(tnext_clean)
         #clean_weights()
         #tnext_clean += clean_weights_interval
-   
+
     pc.psolve(tnext)
-    
-    
+
+
 
 #    if rank == 0:
 #      print 'sim. checkpoint at %g' % h.t
-    
+
     if h.t == told:
-      if rank == 0:
+      # neuron can stop a dt before tstop
+      if rank == 0 and h.t+h.dt < tstop:
         print "psolve did not advance time from t=%.20g to tnext=%.20g\n"%(h.t, tnext)
       break
-#    weight_file(params.filename+('.%d'%isaved))   
+#    weight_file(params.filename+('.%d'%isaved))
     # save spikes and dictionary in a binary format to
     # make them more comprimibles
     import binsave
     binsave.save(params.filename, spikevec, idvec)
-    
+
 #    h.spike2file(params.filename, spikevec, idvec, n_spkout_sort, n_spkout_files)
-  
+
   runtime = h.startsw() - runtime
   comptime = pc.step_time()
   splittime = pc.vtransfer_time(1)
@@ -99,7 +100,7 @@ def printperf(p):
   print '\n max ',
   for i in maxp: print '%12.2f'%i,
   print ''
- 
+
 if __name__ == '__main__':
   import common
   import util
