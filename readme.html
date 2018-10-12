@@ -1,0 +1,51 @@
+<html><body>
+<pre>Model and simulation files for the paper
+
+<b>Parallel odor processing by mitral and middle tufted cells in the olfactory bulb</b>
+
+by Francesco Cavarretta, Shawn D. Burton, Kei M. Igarashi, Michael L. Hines, 
+Gordon M. Shepherd, Michele Migliore,
+<a href="http://dx.doi.org/10.1038/s41598-018-25740-x"><i>Nature Scientific Reports</i></a> (2018)
+
+
+The model is organized in two directories that are named <i>sim</i> and <i>vis</i>.
+They contain the simulation and the visualization software tools, respectively.
+
+<b>simulation</b>
+
+The simulation requires NEURON 7.5 or above with python.
+
+After compilation of the mod files the simulation can be run with a
+script and a command line that depends on the parallel computer
+system.  For an IBM BlueGene/Q, the command line is
+
+mpirun nrniv -mpi -python bulb3dtest.py
+
+The final connectivity, synaptic weight, and spike time files need to be compacted with
+
+./catfiles.sh bulb3dtest
+
+It thus generates three output files, bulb3dtest.dic, bulb3dtest.weight.dat, and bulb3dtest.spk2
+that are used by the visualization tool.
+    
+
+<b>visualization</b>
+
+The visualization requires the Enthought.com Mayavi installed. 
+
+To initialize the visualization software tool, one must generate the mitral and middle tufted cell morphology archive
+by running the following command
+
+nrniv cellwriter.py
+
+This python module is located in <i>sim</i>. This command needs to be executed only once.
+
+To visualize the simulated data (likewise in Figure 1C), run the visualization software tools located in <i>vis</i>:
+
+mayavi2 bulbgui.py -prefix bulb3dtest
+
+Questions and comments should be sent to francescocavarretta@hotmail.it.
+
+</pre>
+
+</body></html>
