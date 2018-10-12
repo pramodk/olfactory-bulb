@@ -69,17 +69,17 @@ def prun(tstop):
 #    weight_file(params.filename+('.%d'%isaved))
     # save spikes and dictionary in a binary format to
     # make them more comprimibles
-    import binsave
-    binsave.save(params.filename, spikevec, idvec)
-
-#    h.spike2file(params.filename, spikevec, idvec, n_spkout_sort, n_spkout_files)
+    #import binsave
+    #binsave.save(params.filename, spikevec, idvec)
 
   runtime = h.startsw() - runtime
+  h.spike2file(params.filename, spikevec, idvec, n_spkout_sort, n_spkout_files)
+
   comptime = pc.step_time()
   splittime = pc.vtransfer_time(1)
   gaptime = pc.vtransfer_time()
   exchtime = pc.wait_time() - exchtime
-  if rank == 0: print 'runtime = %g'% runtime
+  if rank == 0: print ("Solver Time : %lf" % runtime)
   printperf([comptime, exchtime, splittime, gaptime])
 
 def printperf(p):
