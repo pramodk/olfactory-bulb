@@ -21,6 +21,7 @@ try:
 except:
     pass
 
+import os
 
 filename = 'cfg27'
 
@@ -38,7 +39,7 @@ def load_params(_filename):
       stream_orn_w = stream_last; stream_last += 6
       stream_orn_act = stream_last; stream_last += 1
       glom2blanes = []
-      with open('blanes_exc_conn.txt', 'r') as fi:
+      with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'blanes_exc_conn.txt'), 'r') as fi:
         l = fi.readline()
         while l:
           tk = l.split()
@@ -67,7 +68,7 @@ mean_synapse_invl = 10.0
 
 
 glomRealCoords = []
-with open('realgloms.txt', 'r') as fi:
+with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'realgloms.txt'), 'r') as fi:
     line = fi.readline()
     while line:
         token = line.split()

@@ -1,5 +1,5 @@
 import misc
-
+import os
 
 odors = {}
 
@@ -49,7 +49,7 @@ def init(kfilename, etafilename):
     odors[data[0]].k = [ float(x) for x in data[1:] ]
     
 
-init('Kod.txt', 'Eta.txt')
+init(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Kod.txt'), os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Eta.txt'))
 
 if __name__ == '__main__':
   o = odors['Mint']

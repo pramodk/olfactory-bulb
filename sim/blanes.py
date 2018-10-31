@@ -6,7 +6,8 @@ import geodist
 from math import exp
 from util import elapsed
 import params
-h.load_file('blanes.hoc')
+import os
+h.load_file(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'blanes.hoc'))
 
 def load_blanes_dic(filename):
     ggids_here = getmodel().granules.keys()
@@ -104,7 +105,7 @@ def mk_b2g_connections():
 #    gid_blanes_existing = set([x[1] for x in params.glom2blanes ])
     getmodel().blanes2gc_connections.clear()
     elapsed('\t%d granules are generated' % pc.allreduce(len(getmodel().granules),1))
-    for ggid, blanes_gid, factor in load_blanes_dic('blanes6.dic'):
+    for ggid, blanes_gid, factor in load_blanes_dic(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'blanes6.dic')):
       getmodel().blanes2gc_connections.add((ggid, blanes_gid, factor))
 
 #    for ggid in getmodel().granules:
